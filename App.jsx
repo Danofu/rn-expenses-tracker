@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -77,7 +77,9 @@ AllExpensesTabIcon.propTypes = { ...tabIconPropTypes };
 AllExpensesTabIcon.defaultProps = { ...tabIconDefaultProps };
 
 function BottomTabsHeaderRight({ tintColor }) {
-  return <IconButton color={tintColor} icon="add" size={24} />;
+  const { navigate } = useNavigation();
+  const addExpenseHandler = () => navigate('ManageExpense');
+  return <IconButton color={tintColor} icon="add" onPress={addExpenseHandler} size={24} />;
 }
 
 BottomTabsHeaderRight.propTypes = { ...bottomTabsHeaderRightPropTypes };
