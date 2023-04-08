@@ -4,17 +4,20 @@ import { View } from 'react-native';
 import ExpensesList from 'components/ExpensesOutput/ExpensesList';
 import ExpensesSummary from 'components/ExpensesOutput/ExpensesSummary';
 
-function ExpensesOutput({ expenses }) {
+function ExpensesOutput({ expenses, expensesPeriod }) {
   return (
     <View>
-      <ExpensesSummary />
+      <ExpensesSummary expenses={expenses} periodName={expensesPeriod} />
       <ExpensesList />
     </View>
   );
 }
 
-ExpensesOutput.propTypes = { expenses: PropTypes.array.isRequired };
+ExpensesOutput.propTypes = {
+  expenses: PropTypes.arrayOf(PropTypes.shape({ amount: PropTypes.number })).isRequired,
+  expensesPeriod: PropTypes.string,
+};
 
-ExpensesOutput.defaultProps = {};
+ExpensesOutput.defaultProps = { expensesPeriod: '' };
 
 export default ExpensesOutput;
