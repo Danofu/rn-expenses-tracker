@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: GlobalStyles.colors.primary700,
     flex: 1,
-    padding: 24,
+    paddingBottom: 0,
+    paddingHorizontal: 24,
+    paddingTop: 24,
   },
 });
