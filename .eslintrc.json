@@ -6,6 +6,7 @@
   "plugins": ["react"],
   "rules": {
     "global-require": "off",
+    "import/prefer-default-export": "warn",
     "no-unused-expressions": ["error", { "allowTernary": true }],
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "no-use-before-define": ["error", { "functions": false, "variables": false }],
