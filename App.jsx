@@ -5,10 +5,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import AllExpenses from 'screens/AllExpenses';
+import IconButton from 'components/UI/IconButton';
 import ManageExpense from 'screens/ManageExpense';
 import RecentExpenses from 'screens/RecentExpenses';
 import { GlobalStyles } from 'constants/styles';
-import { tabIconDefaultProps, tabIconPropTypes } from 'constants/prop-types';
+import {
+  bottomTabsHeaderRightDefaultProps,
+  bottomTabsHeaderRightPropTypes,
+  tabIconDefaultProps,
+  tabIconPropTypes,
+} from 'constants/prop-types';
 
 const BottomTabs = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -17,6 +23,7 @@ function ExpensesOverview() {
   return (
     <BottomTabs.Navigator
       screenOptions={{
+        headerRight: BottomTabsHeaderRight,
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         headerTintColor: 'white',
         tabBarActiveTintColor: GlobalStyles.colors.accent500,
@@ -68,3 +75,11 @@ function AllExpensesTabIcon({ color, size }) {
 AllExpensesTabIcon.propTypes = { ...tabIconPropTypes };
 
 AllExpensesTabIcon.defaultProps = { ...tabIconDefaultProps };
+
+function BottomTabsHeaderRight({ tintColor }) {
+  return <IconButton color={tintColor} icon="add" size={24} />;
+}
+
+BottomTabsHeaderRight.propTypes = { ...bottomTabsHeaderRightPropTypes };
+
+BottomTabsHeaderRight.defaultProps = { ...bottomTabsHeaderRightDefaultProps };
