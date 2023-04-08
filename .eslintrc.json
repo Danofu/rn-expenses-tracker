@@ -8,11 +8,10 @@
     "global-require": "off",
     "no-unused-expressions": ["error", { "allowTernary": true }],
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "no-use-before-define": ["error", { "variables": false }],
+    "no-use-before-define": ["error", { "functions": false, "variables": false }],
     "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     "react/jsx-props-no-spreading": ["error", { "custom": "ignore" }],
-    "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
     "react/style-prop-object": ["error", { "allow": ["StatusBar"] }]
   },
   "settings": {
