@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import ExpensesList from 'components/ExpensesOutput/ExpensesList';
 import ExpensesSummary from 'components/ExpensesOutput/ExpensesSummary';
+import { expensesDefaultProps, expensesPropTypes } from 'components/ExpensesOutput/prop-types';
 
 const MOCK_EXPENSES = [
   { amount: 59.99, date: new Date('2023-02-12'), description: 'A pair of shoes', id: 'e1' },
@@ -16,7 +17,7 @@ function ExpensesOutput({ expenses = MOCK_EXPENSES, expensesPeriod }) {
   return (
     <View>
       <ExpensesSummary expenses={expenses} periodName={expensesPeriod} />
-      <ExpensesList />
+      <ExpensesList expenses={expenses} />
     </View>
   );
 }
