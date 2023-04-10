@@ -10,11 +10,15 @@ function ManageExpense({ navigation, route }) {
   const { expenseId } = route?.params || {};
   const isEditing = !!expenseId;
 
-  const deleteExpenseHandler = () => {};
+  const cancelHandler = () => navigation.goBack();
 
-  const cancelHandler = () => {};
+  const deleteExpenseHandler = () => {
+    cancelHandler();
+  };
 
-  const confirmHandler = () => {};
+  const confirmHandler = () => {
+    cancelHandler();
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({ title: isEditing ? 'Edit Expense' : 'Add Expense' });
