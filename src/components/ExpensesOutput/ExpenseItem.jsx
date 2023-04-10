@@ -5,10 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import { GlobalStyles } from 'constants/styles';
 import { getFormattedDate } from 'util/date';
 
-function ExpenseItem({ amount, date, description }) {
+function ExpenseItem({ amount, date, description, id }) {
   const { navigate } = useNavigation();
 
-  const expensePressHandler = () => navigate('ManageExpense');
+  const expensePressHandler = () => navigate('ManageExpense', { expenseId: id });
 
   return (
     <Pressable onPress={expensePressHandler} style={({ pressed }) => pressed && styles.pressed}>
@@ -25,9 +25,14 @@ function ExpenseItem({ amount, date, description }) {
   );
 }
 
-ExpenseItem.propTypes = { amount: PropTypes.number, date: PropTypes.instanceOf(Date), description: PropTypes.string };
+ExpenseItem.propTypes = {
+  amount: PropTypes.number,
+  date: PropTypes.instanceOf(Date),
+  description: PropTypes.string,
+  id: PropTypes.string,
+};
 
-ExpenseItem.defaultProps = { amount: NaN, date: undefined, description: '' };
+ExpenseItem.defaultProps = { amount: NaN, date: undefined, description: '', id: '' };
 
 export default ExpenseItem;
 
