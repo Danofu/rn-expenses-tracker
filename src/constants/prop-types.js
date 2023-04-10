@@ -14,3 +14,6 @@ export const screenPropTypes = {
   route: PropTypes.shape({ params: PropTypes.object }).isRequired,
 };
 export const screenDefaultProps = {};
+
+export const childrenPropTypes = { children: PropTypes.node };
+export const childrenDefaultProps = { children: undefined };
