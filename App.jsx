@@ -48,7 +48,7 @@ function ExpensesOverview() {
 function App() {
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <ExpensesProvider>
         <NavigationContainer>
           <Stack.Navigator
