@@ -47,7 +47,7 @@ function ExpensesProvider({ children }) {
 
   const updateExpense = (id, expenseData) => dispatch({ payload: { data: expenseData, id }, type: 'UPDATE' });
 
-  const value = useMemo(() => ({}), []);
+  const value = useMemo(() => ({ addExpense, deleteExpense, expenses: expensesState, updateExpense }), [expensesState]);
 
   return <ExpensesContext.Provider value={value}>{children}</ExpensesContext.Provider>;
 }
