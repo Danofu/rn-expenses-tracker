@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { GlobalStyles } from 'constants/styles';
 
-function Input({ label, textInputConfig }) {
+function Input({ label, style, textInputConfig }) {
   const inputStyles = [styles.input];
 
   if (textInputConfig && textInputConfig.multiline) {
@@ -11,16 +11,16 @@ function Input({ label, textInputConfig }) {
   }
 
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, style]}>
       <Text style={styles.label}>{label}</Text>
       <TextInput style={inputStyles} {...textInputConfig} />
     </View>
   );
 }
 
-Input.propTypes = { label: PropTypes.string, textInputConfig: PropTypes.object };
+Input.propTypes = { label: PropTypes.string, style: PropTypes.object, textInputConfig: PropTypes.object };
 
-Input.defaultProps = { label: '', textInputConfig: {} };
+Input.defaultProps = { label: '', style: {}, textInputConfig: {} };
 
 export default Input;
 
