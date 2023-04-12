@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Button from 'components/UI/Button';
 import Input from 'components/ManageExpense/Input';
 import { getFormattedDate } from 'util/date';
+import { GlobalStyles } from '../../constants/styles';
 
 function ExpenseForm({ defaultValues, onCancel, onSubmit, submitButtonLabel }) {
   const [inputs, setInputs] = useState({
@@ -48,6 +49,7 @@ function ExpenseForm({ defaultValues, onCancel, onSubmit, submitButtonLabel }) {
       <Text style={styles.title}>Your Expense</Text>
       <View style={styles.inputsRow}>
         <Input
+          invalid={!inputs.amount.isValid}
           label="Amount"
           style={styles.rowInput}
           textInputConfig={{
@@ -57,6 +59,7 @@ function ExpenseForm({ defaultValues, onCancel, onSubmit, submitButtonLabel }) {
           }}
         />
         <Input
+          invalid={!inputs.date.isValid}
           label="Date"
           style={styles.rowInput}
           textInputConfig={{
@@ -68,6 +71,7 @@ function ExpenseForm({ defaultValues, onCancel, onSubmit, submitButtonLabel }) {
         />
       </View>
       <Input
+        invalid={!inputs.description.isValid}
         label="Description"
         textInputConfig={{
           multiline: true,
@@ -75,7 +79,7 @@ function ExpenseForm({ defaultValues, onCancel, onSubmit, submitButtonLabel }) {
           value: inputs.description.value,
         }}
       />
-      {formIsInvalid && <Text>Invalid input values - please check your entered data !</Text>}
+      {formIsInvalid && <Text style={styles.errorText}>Invalid input values - please check your entered data !</Text>}
       <View style={styles.buttons}>
         <Button mode="flat" onPress={onCancel} style={styles.button}>
           Cancel
@@ -117,6 +121,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  errorText: {
+    color: GlobalStyles.colors.error500,
+    margin: 8,
+    textAlign: 'center',
   },
   form: {
     marginTop: 40,
