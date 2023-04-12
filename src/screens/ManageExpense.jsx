@@ -8,10 +8,11 @@ import { GlobalStyles } from 'constants/styles';
 import { screenDefaultProps, screenPropTypes } from 'constants/prop-types';
 
 function ManageExpense({ navigation, route }) {
-  const { addExpense, deleteExpense, updateExpense } = useContext(ExpensesContext);
+  const { addExpense, deleteExpense, expenses, updateExpense } = useContext(ExpensesContext);
 
   const { expenseId } = route?.params || {};
   const isEditing = !!expenseId;
+  const selectedExpense = expenses.find((expense) => expense.id === expenseId);
 
   const cancelHandler = () => navigation.goBack();
 
@@ -32,6 +33,7 @@ function ManageExpense({ navigation, route }) {
   return (
     <View style={styles.container}>
       <ExpenseForm
+        defaultValues={selectedExpense}
         onCancel={cancelHandler}
         onSubmit={confirmHandler}
         submitButtonLabel={isEditing ? 'Update' : 'Add'}
