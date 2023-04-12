@@ -20,10 +20,8 @@ function ManageExpense({ navigation, route }) {
     cancelHandler();
   };
 
-  const confirmHandler = () => {
-    isEditing
-      ? updateExpense(expenseId, { amount: 99.99, date: new Date('2023-04-09'), description: 'Test !' })
-      : addExpense({ amount: 29.99, date: new Date('2023-04-11'), description: 'Test' });
+  const confirmHandler = (expenseData) => {
+    isEditing ? updateExpense(expenseId, expenseData) : addExpense(expenseData);
     cancelHandler();
   };
 
@@ -33,7 +31,11 @@ function ManageExpense({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <ExpenseForm onCancel={cancelHandler} submitButtonLabel={isEditing ? 'Update' : 'Add'} />
+      <ExpenseForm
+        onCancel={cancelHandler}
+        onSubmit={confirmHandler}
+        submitButtonLabel={isEditing ? 'Update' : 'Add'}
+      />
       {isEditing && (
         <View style={styles.deleteContainer}>
           <IconButton color={GlobalStyles.colors.error500} icon="trash" onPress={deleteExpenseHandler} size={36} />

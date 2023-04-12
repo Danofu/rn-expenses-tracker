@@ -11,7 +11,15 @@ function ExpenseForm({ onCancel, onSubmit, submitButtonLabel }) {
   const inputChangedHandler = (inputId, value) =>
     setInputValues((prevInputValues) => ({ ...prevInputValues, [inputId]: value }));
 
-  const submitHandler = () => {};
+  const submitHandler = () => {
+    const expenseData = {
+      amount: +inputValues.amount,
+      date: new Date(inputValues.date),
+      description: inputValues.description,
+    };
+
+    onSubmit(expenseData);
+  };
 
   return (
     <View style={styles.form}>
@@ -32,7 +40,7 @@ function ExpenseForm({ onCancel, onSubmit, submitButtonLabel }) {
           textInputConfig={{
             maxLength: 10,
             onChangeText: inputChangedHandler.bind(this, 'date'),
-            placeholder: 'DD/MM/YYYY',
+            placeholder: 'YYYY-MM-DD',
             value: inputValues.date,
           }}
         />
