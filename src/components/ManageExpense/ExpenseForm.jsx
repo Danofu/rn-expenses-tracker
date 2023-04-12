@@ -14,7 +14,7 @@ function ExpenseForm() {
         label="Date"
         textInputConfig={{ maxLength: 10, onChangeText: dateChangedHandler, placeholder: 'DD/MM/YYYY' }}
       />
-      <Input label="Description" textInputConfig={{}} />
+      <Input label="Description" textInputConfig={{ multiline: true }} />
     </View>
   );
 }
