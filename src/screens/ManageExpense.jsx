@@ -1,7 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { useContext, useLayoutEffect } from 'react';
 
-import Button from 'components/UI/Button';
 import ExpenseForm from 'components/ManageExpense/ExpenseForm';
 import IconButton from 'components/UI/IconButton';
 import { ExpensesContext } from 'store/ExpensesProvider';
@@ -34,15 +33,7 @@ function ManageExpense({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <ExpenseForm />
-      <View style={styles.buttons}>
-        <Button mode="flat" onPress={cancelHandler} style={styles.button}>
-          Cancel
-        </Button>
-        <Button onPress={confirmHandler} style={styles.button}>
-          {isEditing ? 'Update' : 'Add'}
-        </Button>
-      </View>
+      <ExpenseForm onCancel={cancelHandler} submitButtonLabel={isEditing ? 'Update' : 'Add'} />
       {isEditing && (
         <View style={styles.deleteContainer}>
           <IconButton color={GlobalStyles.colors.error500} icon="trash" onPress={deleteExpenseHandler} size={36} />
@@ -59,15 +50,6 @@ ManageExpense.defaultProps = { ...screenDefaultProps };
 export default ManageExpense;
 
 const styles = StyleSheet.create({
-  button: {
-    marginHorizontal: 8,
-    minWidth: 120,
-  },
-  buttons: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
   container: {
     backgroundColor: GlobalStyles.colors.primary800,
     flex: 1,
