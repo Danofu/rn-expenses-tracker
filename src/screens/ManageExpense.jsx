@@ -6,6 +6,7 @@ import IconButton from 'components/UI/IconButton';
 import { ExpensesContext } from 'store/ExpensesProvider';
 import { GlobalStyles } from 'constants/styles';
 import { screenDefaultProps, screenPropTypes } from 'constants/prop-types';
+import { storeExpense } from 'util/http';
 
 function ManageExpense({ navigation, route }) {
   const { addExpense, deleteExpense, expenses, updateExpense } = useContext(ExpensesContext);
@@ -21,8 +22,13 @@ function ManageExpense({ navigation, route }) {
     cancelHandler();
   };
 
-  const confirmHandler = (expenseData) => {
-    isEditing ? updateExpense(expenseId, expenseData) : addExpense(expenseData);
+  const confirmHandler = async (expenseData) => {
+    if (isEditing) {
+      updateExpense(expenseId, expenseData);
+    } else {
+      await storeExpense(expenseData);
+      addExpense(expenseData);
+    }
     cancelHandler();
   };
 

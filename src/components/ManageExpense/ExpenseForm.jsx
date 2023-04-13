@@ -22,7 +22,7 @@ function ExpenseForm({ defaultValues, onCancel, onSubmit, submitButtonLabel }) {
 
   const submitHandler = () => {
     const expenseData = {
-      amount: +inputs.amount.value,
+      amount: +inputs.amount.value.replaceAll(',', '.'),
       date: new Date(inputs.date.value),
       description: inputs.description.value,
     };
