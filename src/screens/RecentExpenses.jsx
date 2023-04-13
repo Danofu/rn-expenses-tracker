@@ -1,11 +1,15 @@
 import moment from 'moment';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
+import ErrorOverlay from 'components/UI/ErrorOverlay';
 import ExpensesOutput from 'components/ExpensesOutput';
+import LoadingOverlay from 'components/UI/LoadingOverlay';
 import { ExpensesContext } from 'store/ExpensesProvider';
 import { fetchExpenses } from 'util/http';
 
 function RecentExpenses() {
+  const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState(undefined);
   const { expenses, setExpenses } = useContext(ExpensesContext);
 
   const today = moment();
@@ -14,11 +18,25 @@ function RecentExpenses() {
 
   useEffect(() => {
     const getExpenses = async () => {
-      const fetchedExpenses = await fetchExpenses();
-      setExpenses(fetchedExpenses);
+      setIsFetching(true);
+      try {
+        const fetchedExpenses = await fetchExpenses();
+        setExpenses(fetchedExpenses);
+      } catch (_error) {
+        setError('Could not fetch expenses !');
+      }
+      setIsFetching(false);
     };
     getExpenses().then();
-  }, [setExpenses]);
+  }, []);
+
+  if (error && !isFetching) {
+    return <ErrorOverlay message={error} />;
+  }
+
+  if (isFetching) {
+    return <LoadingOverlay />;
+  }
 
   return (
     <ExpensesOutput
