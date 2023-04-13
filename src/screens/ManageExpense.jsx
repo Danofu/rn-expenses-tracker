@@ -26,8 +26,8 @@ function ManageExpense({ navigation, route }) {
     if (isEditing) {
       updateExpense(expenseId, expenseData);
     } else {
-      await storeExpense(expenseData);
-      addExpense(expenseData);
+      const id = await storeExpense(expenseData);
+      addExpense({ ...expenseData, id });
     }
     cancelHandler();
   };

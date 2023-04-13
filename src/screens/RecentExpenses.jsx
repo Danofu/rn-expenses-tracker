@@ -1,15 +1,24 @@
-import { useContext } from 'react';
+import moment from 'moment';
+import { useContext, useEffect } from 'react';
 
 import ExpensesOutput from 'components/ExpensesOutput';
 import { ExpensesContext } from 'store/ExpensesProvider';
-import moment from 'moment';
+import { fetchExpenses } from 'util/http';
 
 function RecentExpenses() {
-  const { expenses } = useContext(ExpensesContext);
+  const { expenses, setExpenses } = useContext(ExpensesContext);
 
   const today = moment();
   const sevenDaysAgo = today.clone().subtract(7, 'days');
   const recentExpenses = expenses.filter((expense) => moment(expense.date).isBetween(sevenDaysAgo, today, 'day', '[]'));
+
+  useEffect(() => {
+    const getExpenses = async () => {
+      const fetchedExpenses = await fetchExpenses();
+      setExpenses(fetchedExpenses);
+    };
+    getExpenses().then();
+  }, [setExpenses]);
 
   return (
     <ExpensesOutput

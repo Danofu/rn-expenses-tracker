@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
 
 import Button from 'components/UI/Button';
